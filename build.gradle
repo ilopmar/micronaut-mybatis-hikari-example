@@ -39,6 +39,10 @@ dependencies {
     compile "io.micronaut:http-server-netty"
     compile "io.micronaut:inject"
     compile "io.micronaut:runtime"
+
+    compile 'org.mybatis:mybatis:3.4.6'
+    runtime 'mysql:mysql-connector-java:5.1.21'
+
     compileOnly "io.micronaut:inject-java"
     runtime "ch.qos.logback:logback-classic:1.2.3"
     testCompile "junit:junit:4.12"

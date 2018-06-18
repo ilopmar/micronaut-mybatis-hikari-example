@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="issue271.service.CategoryMapper">
+
+    <select id="selectCategoryById" parameterType="int" resultType="issue271.domain.Category">
+        select category_id as categoryId, category_name as categoryName from category where category_id = #{id}
+    </select>
+
+</mapper>
