@@ -2,23 +2,33 @@ package issue271.mybatis;
 
 import io.micronaut.context.annotation.Context;
 import io.micronaut.context.annotation.Factory;
-import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.mapping.Environment;
+import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.transaction.TransactionFactory;
+import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
-import java.io.IOException;
-import java.io.Reader;
+import javax.sql.DataSource;
 
 @Factory
 public class MybatisFactory {
 
+    final DataSource dataSource;
+
+    public MybatisFactory(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     @Context
-    SqlSessionFactory sessionFactory() throws IOException {
-        try {
-            Reader reader = Resources.getResourceAsReader("database-config.xml");
-            return new SqlSessionFactoryBuilder().build(reader);
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
+    SqlSessionFactory sessionFactory() {
+
+        TransactionFactory transactionFactory = new JdbcTransactionFactory();
+        Environment environment  = new Environment("developpment", transactionFactory, dataSource);
+
+        Configuration configuration = new Configuration(environment);
+        configuration.addMappers("issue271.service");
+
+        return new SqlSessionFactoryBuilder().build(configuration);
     }
 }

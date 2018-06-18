@@ -4,3 +4,9 @@ micronaut:
     server:
         port: 8080
 
+datasources:
+    default:
+        url: jdbc:mysql://localhost:3306/test
+        username: root
+        password: secret
+        driverClassName: com.mysql.jdbc.Driver

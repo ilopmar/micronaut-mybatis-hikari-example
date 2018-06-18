@@ -42,6 +42,7 @@ dependencies {
 
     compile 'org.mybatis:mybatis:3.4.6'
     runtime 'mysql:mysql-connector-java:5.1.21'
+    compile "io.micronaut.configuration:jdbc-hikari"
 
     compileOnly "io.micronaut:inject-java"
     runtime "ch.qos.logback:logback-classic:1.2.3"
